@@ -18,13 +18,21 @@ async function getRepository(id: string) {
   return data;
 }
 
+async function getCurrentUserId() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  return user?.id ?? null;
+}
+
 export default async function RepositoryDetailPage({ params }: { params: { id: string } }) {
   const repo = await getRepository(params.id);
   if (!repo) notFound();
 
+  const currentUserId = await getCurrentUserId();
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <RepositoryDetail repo={repo} />
+      <RepositoryDetail repo={repo} currentUserId={currentUserId ?? undefined} />
     </div>
   );
 }
