@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Star, Code2, Bell, TrendingUp, Award } from "lucide-react";
 import { getLevelName, getXPProgress } from "@/utils/xp";
 import { formatNumber } from "@/utils/format";
@@ -139,7 +140,7 @@ export default async function DashboardPage() {
 
       {/* Quick actions */}
       <div className="grid sm:grid-cols-2 gap-4 mt-6">
-        <a href="/repositories/submit"
+        <Link href="/repositories/submit"
           className="flex items-center gap-4 p-5 rounded-xl transition-all hover:scale-[1.02] group"
           style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))" }}
           id="submit-repo-cta">
@@ -151,7 +152,7 @@ export default async function DashboardPage() {
             <p className="font-semibold text-sm">Submit a Repository</p>
             <p className="text-xs text-muted-foreground">Share your project with the community</p>
           </div>
-        </a>
+        </Link>
 
         <a href="/explore/trending"
           className="flex items-center gap-4 p-5 rounded-xl transition-all hover:scale-[1.02] group"
