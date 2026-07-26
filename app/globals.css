@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+/* ============================================================
+   GitBoost Design System — CSS Variables
+   ============================================================ */
+
+:root {
+  /* Brand Colors — Light Mode */
+  --background: oklch(100% 0 0);
+  --foreground: oklch(14% 0.03 264);
+  --card: oklch(100% 0 0);
+  --card-foreground: oklch(14% 0.03 264);
+  --popover: oklch(100% 0 0);
+  --popover-foreground: oklch(14% 0.03 264);
+  --primary: oklch(55% 0.22 292);
+  --primary-foreground: oklch(100% 0 0);
+  --secondary: oklch(97% 0.004 286);
+  --secondary-foreground: oklch(14% 0.03 264);
+  --muted: oklch(97% 0.004 286);
+  --muted-foreground: oklch(56% 0.02 286);
+  --accent: oklch(97% 0.004 286);
+  --accent-foreground: oklch(14% 0.03 264);
+  --destructive: oklch(60% 0.22 25);
+  --destructive-foreground: oklch(98% 0 0);
+  --border: oklch(92% 0.007 286);
+  --input: oklch(92% 0.007 286);
+  --ring: oklch(55% 0.22 292);
+  --radius: 0.75rem;
+
+  /* Gradient */
+  --gradient-brand: linear-gradient(135deg, oklch(55% 0.22 292) 0%, oklch(60% 0.2 310) 50%, oklch(58% 0.18 330) 100%);
+}
+
+.dark {
+  --background: oklch(11% 0.02 264);
+  --foreground: oklch(91% 0.01 264);
+  --card: oklch(14% 0.02 264);
+  --card-foreground: oklch(91% 0.01 264);
+  --popover: oklch(14% 0.02 264);
+  --popover-foreground: oklch(91% 0.01 264);
+  --primary: oklch(68% 0.2 292);
+  --primary-foreground: oklch(11% 0.02 264);
+  --secondary: oklch(20% 0.02 264);
+  --secondary-foreground: oklch(91% 0.01 264);
+  --muted: oklch(20% 0.02 264);
+  --muted-foreground: oklch(55% 0.01 264);
+  --accent: oklch(20% 0.02 264);
+  --accent-foreground: oklch(91% 0.01 264);
+  --destructive: oklch(55% 0.2 25);
+  --destructive-foreground: oklch(91% 0.01 264);
+  --border: oklch(25% 0.02 264);
+  --input: oklch(25% 0.02 264);
+  --ring: oklch(68% 0.2 292);
+
+  /* Gradient */
+  --gradient-brand: linear-gradient(135deg, oklch(68% 0.2 292) 0%, oklch(70% 0.18 310) 50%, oklch(65% 0.16 330) 100%);
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-feature-settings: "rlig" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted-foreground); }
+
+/* Selection */
+::selection {
+  background: color-mix(in oklch, var(--primary) 30%, transparent);
+  color: var(--foreground);
+}
+
+/* ============================================================
+   Semantic color utilities (via inline styles, not @apply)
+   ============================================================ */
+
+/* Text colors */
+.text-foreground     { color: var(--foreground); }
+.text-muted-foreground { color: var(--muted-foreground); }
+.text-primary        { color: var(--primary); }
+.text-destructive    { color: var(--destructive); }
+
+/* Background colors */
+.bg-background  { background-color: var(--background); }
+.bg-card        { background-color: var(--card); }
+.bg-muted       { background-color: var(--muted); }
+.bg-primary     { background-color: var(--primary); }
+
+/* Border colors */
+.border-border  { border-color: var(--border); }
+.border-primary { border-color: var(--primary); }
+
+/* ============================================================
+   Utility classes
+   ============================================================ */
+.text-gradient {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass {
+  background: color-mix(in oklch, var(--card) 60%, transparent);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid color-mix(in oklch, var(--border) 50%, transparent);
+}
+
+.glass-strong {
+  background: color-mix(in oklch, var(--card) 85%, transparent);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid color-mix(in oklch, var(--border) 70%, transparent);
+}
+
+.glow-brand {
+  box-shadow: 0 0 30px color-mix(in oklch, var(--primary) 30%, transparent);
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px color-mix(in oklch, var(--primary) 20%, transparent); }
+  50%       { box-shadow: 0 0 40px color-mix(in oklch, var(--primary) 50%, transparent); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+.animate-in {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--muted) 25%,
+    color-mix(in oklch, var(--muted-foreground) 10%, transparent) 50%,
+    var(--muted) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
