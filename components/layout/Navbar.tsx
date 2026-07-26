@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Zap, Search, Bell, Menu, X, ChevronDown,
-  LayoutDashboard, Code2, Star, TrendingUp,
+  LayoutDashboard, Code2, TrendingUp,
   Settings, LogOut, User, Shield
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";

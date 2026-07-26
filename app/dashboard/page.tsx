@@ -1,9 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import type { Metadata } from "next";
-import { Zap, Star, Code2, Bell, TrendingUp, Award } from "lucide-react";
+import { Star, Code2, Bell, TrendingUp, Award } from "lucide-react";
 import { getLevelName, getXPProgress } from "@/utils/xp";
 import { formatNumber } from "@/utils/format";
+import type { Tables } from "@/types/database.types";
 
 export const metadata: Metadata = {
   title: "Dashboard — GitBoost",
@@ -20,7 +21,8 @@ export default async function DashboardPage() {
     .eq("id", user.id)
     .single();
 
-  if (!profile) redirect("/auth/setup");
+  const profileData = profile as Tables<"profiles"> | null;
+  if (!profileData) redirect("/auth/setup");
 
   const { data: repoCount } = await supabase
     .from("repositories")
@@ -46,14 +48,17 @@ export default async function DashboardPage() {
     .eq("profile_id", user.id)
     .limit(4);
 
-  const xpProgress = getXPProgress(profile.xp, profile.level);
-  const levelName = getLevelName(profile.level);
+  const xpProgress = getXPProgress(profileData.xp, profileData.level);
+  const levelName = getLevelName(profileData.level);
+
+  type CountResult = { count: number | null } | null;
+  type AchievementResult = { achievement_id: string; achievements: { name: string; icon: string | null; rarity: string } | null };
 
   const stats = [
-    { label: "Repositories", value: (repoCount as any)?.count ?? 0, icon: Code2, color: "hsl(217 91% 60%)" },
-    { label: "Reviews Written", value: (reviewCount as any)?.count ?? 0, icon: Star, color: "hsl(38 92% 50%)" },
-    { label: "Notifications", value: (unreadNotifs as any)?.count ?? 0, icon: Bell, color: "hsl(263 70% 65%)" },
-    { label: "Trust Score", value: profile.trust_score, icon: TrendingUp, color: "hsl(142 71% 45%)" },
+    { label: "Repositories", value: (repoCount as CountResult)?.count ?? 0, icon: Code2, color: "hsl(217 91% 60%)" },
+    { label: "Reviews Written", value: (reviewCount as CountResult)?.count ?? 0, icon: Star, color: "hsl(38 92% 50%)" },
+    { label: "Notifications", value: (unreadNotifs as CountResult)?.count ?? 0, icon: Bell, color: "hsl(263 70% 65%)" },
+    { label: "Trust Score", value: profileData.trust_score, icon: TrendingUp, color: "hsl(142 71% 45%)" },
   ];
 
   return (
@@ -61,7 +66,7 @@ export default async function DashboardPage() {
       {/* Welcome header */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold mb-1">
-          Welcome back, {profile.display_name ?? profile.username} 👋
+          Welcome back, {profileData.display_name ?? profileData.username} 👋
         </h1>
         <p className="text-muted-foreground text-sm">
           Here&apos;s what&apos;s happening with your GitBoost profile.
@@ -73,12 +78,12 @@ export default async function DashboardPage() {
         style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))" }}>
         <div className="flex items-center justify-between mb-4">
           <div>
-            <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Level {profile.level}</p>
+            <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Level {profileData.level}</p>
             <p className="text-lg font-bold">{levelName}</p>
           </div>
           <div className="text-right">
             <p className="text-xs text-muted-foreground mb-1">Total XP</p>
-            <p className="text-xl font-bold text-gradient">{formatNumber(profile.xp)}</p>
+            <p className="text-xl font-bold text-gradient">{formatNumber(profileData.xp)}</p>
           </div>
         </div>
 
@@ -91,7 +96,7 @@ export default async function DashboardPage() {
         </div>
         <div className="flex justify-between mt-2 text-xs text-muted-foreground">
           <span>{formatNumber(xpProgress.current)} XP</span>
-          <span>{xpProgress.percentage}% to Level {profile.level + 1}</span>
+          <span>{xpProgress.percentage}% to Level {profileData.level + 1}</span>
           <span>{formatNumber(xpProgress.required)} XP needed</span>
         </div>
       </div>
@@ -121,7 +126,7 @@ export default async function DashboardPage() {
             <h2 className="font-semibold text-sm">Recent Achievements</h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {achievements.map((a: any) => (
+            {achievements.map((a: AchievementResult) => (
               <div key={a.achievement_id} className="flex items-center gap-3 p-3 rounded-xl"
                 style={{ background: "hsl(var(--muted))" }}>
                 <span className="text-2xl">{a.achievements?.icon ?? "🏆"}</span>

@@ -4,6 +4,8 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
+import type { TablesUpdate } from "@/types/database.types";
+
 const profileSetupSchema = z.object({
   display_name: z.string().min(2).max(100),
   bio: z.string().max(500).optional(),
@@ -38,19 +40,23 @@ export async function saveProfileSetup(formData: FormData) {
     return { error: parsed.error.issues[0]?.message ?? "Validation error" };
   }
 
-  const { error } = await supabase
+  const updateData: TablesUpdate<"profiles"> = {
+    ...parsed.data,
+    updated_at: new Date().toISOString(),
+    updated_by: user.id,
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { error } = await (supabase as any)
     .from("profiles")
-    .update({
-      ...parsed.data,
-      updated_at: new Date().toISOString(),
-      updated_by: user.id,
-    })
+    .update(updateData)
     .eq("id", user.id);
 
   if (error) return { error: error.message };
 
   // Grant profile_complete achievement
-  await supabase.rpc("grant_achievement", {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  await (supabase as any).rpc("grant_achievement", {
     p_profile_id: user.id,
     p_achievement_code: "profile_complete",
   });

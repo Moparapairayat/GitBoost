@@ -1,4 +1,3 @@
-import { createServerClient } from "@supabase/ssr";
 import { createClient as createAdminClient } from "@supabase/supabase-js";
 import type { Database } from "@/types/database.types";
 

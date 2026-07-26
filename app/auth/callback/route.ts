@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 
+import type { Database } from "@/types/database.types";
+
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
@@ -11,7 +13,6 @@ export async function GET(request: Request) {
     const { error } = await supabase.auth.exchangeCodeForSession(code);
 
     if (!error) {
-      // Check if profile setup is complete
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         const { data: profile } = await supabase
@@ -20,8 +21,8 @@ export async function GET(request: Request) {
           .eq("id", user.id)
           .single();
 
-        // If profile is incomplete, redirect to setup
-        const isProfileComplete = profile?.bio && profile?.skills && profile.skills.length > 0;
+        const profileData = profile as Pick<Database["public"]["Tables"]["profiles"]["Row"], "bio" | "skills" | "experience_years"> | null;
+        const isProfileComplete = profileData?.bio && profileData?.skills && profileData.skills.length > 0;
         if (!isProfileComplete) {
           return NextResponse.redirect(`${origin}/auth/setup`);
         }

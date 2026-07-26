@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
+import type { Tables } from "@/types/database.types";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -23,11 +24,12 @@ export default async function DashboardLayout({
     .eq("id", user.id)
     .single();
 
-  if (!profile || profile.is_banned) redirect("/auth/signin?error=banned");
+  const profileData = profile as Tables<"profiles"> | null;
+  if (!profileData || profileData.is_banned) redirect("/auth/signin?error=banned");
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar profile={profile} />
+      <Navbar profile={profileData} />
       <main className="flex-1 pt-16">
         {children}
       </main>

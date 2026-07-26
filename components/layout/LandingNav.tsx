@@ -6,7 +6,6 @@ import { Zap, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { APP_NAME } from "@/lib/constants";
-import { cn } from "@/utils/cn";
 
 const NAV_LINKS = [
   { href: "#features", label: "Features" },
