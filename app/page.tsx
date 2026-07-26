@@ -2,17 +2,47 @@ import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
 import HeroSection from "@/features/landing/HeroSection";
 import FeaturesSection from "@/features/landing/FeaturesSection";
+import TrendingSection from "@/features/landing/TrendingSection";
+import FeaturedDevelopers from "@/features/landing/FeaturedDevelopers";
 import StatsSection from "@/features/landing/StatsSection";
 import PricingSection from "@/features/landing/PricingSection";
 import FAQSection from "@/features/landing/FAQSection";
 import LandingFooter from "@/components/layout/LandingFooter";
 import LandingNav from "@/components/layout/LandingNav";
-import { APP_NAME, APP_TAGLINE } from "@/lib/constants";
+import { APP_NAME, APP_TAGLINE, APP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: `${APP_NAME} — ${APP_TAGLINE}`,
   description:
     "GitBoost is the developer community platform to discover quality open-source projects, receive genuine feedback, and grow organically.",
+  alternates: {
+    canonical: APP_URL,
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: APP_URL,
+    siteName: APP_NAME,
+    title: `${APP_NAME} — ${APP_TAGLINE}`,
+    description:
+      "Discover quality open-source projects, connect with developers, and grow organically.",
+    images: [
+      {
+        url: `${APP_URL}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: APP_NAME,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${APP_NAME} — ${APP_TAGLINE}`,
+    description:
+      "Discover quality open-source projects, connect with developers, and grow organically.",
+    creator: "@gitboostdev",
+    images: [`${APP_URL}/og-image.png`],
+  },
 };
 
 export default async function HomePage() {
@@ -43,6 +73,8 @@ export default async function HomePage() {
       <main>
         <HeroSection isAuthenticated={!!user} />
         <FeaturesSection />
+        <TrendingSection />
+        <FeaturedDevelopers />
         <StatsSection repoCount={repoCount ?? 0} userCount={userCount ?? 0} />
         <PricingSection />
         <FAQSection />
