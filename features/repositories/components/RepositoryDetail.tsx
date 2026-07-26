@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { Star, GitBranch, ExternalLink, Calendar, Eye } from "lucide-react";
 import type { Tables } from "@/types/database.types";
 import { formatNumber, formatRelativeTime } from "@/utils/format";
+import ReviewList from "@/features/reviews/components/ReviewList";
+import CommentSection from "@/features/comments/components/CommentSection";
 
 type Repository = Tables<"repositories"> & {
   profiles: { username: string; display_name: string | null; avatar_url: string | null } | null;
@@ -11,9 +13,10 @@ type Repository = Tables<"repositories"> & {
 
 interface RepositoryDetailProps {
   repo: Repository;
+  currentUserId?: string;
 }
 
-export default function RepositoryDetail({ repo }: RepositoryDetailProps) {
+export default function RepositoryDetail({ repo, currentUserId }: RepositoryDetailProps) {
   return (
     <div className="max-w-4xl mx-auto">
       <motion.div
@@ -86,12 +89,12 @@ export default function RepositoryDetail({ repo }: RepositoryDetailProps) {
       </motion.div>
 
       <div className="rounded-2xl p-8" style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))" }}>
-        <h2 className="text-lg font-semibold mb-4">About this repository</h2>
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          This is a placeholder for the repository README and detailed information.
-          In the full implementation, this section will display the fetched README content,
-          screenshots, tags, and other metadata.
-        </p>
+        <h2 className="text-lg font-semibold mb-4">Reviews</h2>
+        <ReviewList repositoryId={repo.id} currentUserId={currentUserId} />
+      </div>
+
+      <div className="mt-6">
+        <CommentSection repositoryId={repo.id} currentUserId={currentUserId} />
       </div>
     </div>
   );
