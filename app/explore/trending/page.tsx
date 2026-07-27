@@ -9,7 +9,7 @@ async function getTrendingRepos() {
   const supabase = await createClient();
   const { data } = await supabase
     .from("repositories")
-    .select("id, title, description, language, github_stars, github_forks, view_count, trending_score, created_at, profile_id, profiles(username, display_name, avatar_url)", { count: "exact" })
+    .select("id, title, description, language, github_stars, github_forks, view_count, trending_score, created_at, profile_id, profiles!repositories_profile_id_fkey(username, display_name, avatar_url)", { count: "exact" })
     .eq("status", "active")
     .is("deleted_at", null)
     .order("trending_score", { ascending: false })
@@ -44,3 +44,4 @@ export default async function TrendingPage({
     </div>
   );
 }
+

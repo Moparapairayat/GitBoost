@@ -14,7 +14,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
     const supabase = await createClient();
     let query = supabase
       .from("reviews")
-      .select("id, rating_overall, rating_code, rating_docs, rating_perf, rating_ui, rating_arch, pros, cons, suggestions, body, helpful_count, created_at, profile_id, profiles(username, display_name, avatar_url)", { count: "exact" })
+      .select("id, rating_overall, rating_code, rating_docs, rating_perf, rating_ui, rating_arch, pros, cons, suggestions, body, helpful_count, created_at, profile_id, profiles!repositories_profile_id_fkey(username, display_name, avatar_url)", { count: "exact" })
       .eq("repository_id", id)
       .is("deleted_at", null);
 

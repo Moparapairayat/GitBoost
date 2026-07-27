@@ -6,6 +6,13 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS "pg_trgm";    -- for fuzzy full-text search
 
+-- Ensure uuid_generate_v4 is available
+CREATE OR REPLACE FUNCTION uuid_generate_v4() RETURNS UUID AS $$
+BEGIN
+  RETURN uuid_in(overlay(overlay(md5(extract(epoch FROM now())::text || random()::text) placing '4' from 13) placing 'a' from 17)::cstring);
+END;
+$$ LANGUAGE plpgsql VOLATILE;
+
 -- ============================================================
 -- ENUMS
 -- ============================================================

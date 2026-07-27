@@ -1,34 +1,15 @@
-project_id = "gitboost"
-name = "gitboost"
-org_id = "your-org-id"
-database = {
-  port = 5432
-  host = "db.xxx.supabase.co"
-  password = "your-db-password"
-  user = "postgres"
-}
-endpoints = {
-  auth = "https://xxx.supabase.co/auth/v1"
-  db = "https://xxx.supabase.co/rest/v1"
-  storage = "https://xxx.supabase.co/storage/v1"
-  edge_functions = "https://xxx.supabase.co/functions/v1"
-}
-service_role_key = "your-service-role-key"
-anon_key = "your-anon-key"
+project_id = "GitBoost"
 
 [auth]
 enabled = true
 site_url = "http://localhost:3000"
 additional_redirect_urls = ["https://gitboost.dev"]
 jwt_expiry = 3600
-refresh_token_rotated = true
-external = {
-  github = {
-    enabled = true
-    client_id = "your-github-oauth-client-id"
-    secret = "your-github-oauth-secret"
-  }
-}
+
+[auth.external.github]
+enabled = true
+client_id = "YOUR_GITHUB_CLIENT_ID"
+secret = "YOUR_GITHUB_SECRET"
 
 [functions]
 [functions."grant-achievement"]

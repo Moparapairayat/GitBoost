@@ -8,7 +8,7 @@ async function getRepository(id: string) {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("repositories")
-    .select("*, profiles(username, display_name, avatar_url, github_username)")
+    .select("*, profiles!repositories_profile_id_fkey(username, display_name, avatar_url, github_username)")
     .eq("id", id)
     .eq("status", "active")
     .is("deleted_at", null)

@@ -5,7 +5,13 @@ import { Star, GitBranch, ExternalLink } from "lucide-react";
 import type { Tables } from "@/types/database.types";
 import { formatNumber } from "@/utils/format";
 
-type Repository = Tables<"repositories"> & {
+type Repository = {
+  id: string;
+  title: string;
+  description: string | null;
+  language: string | null;
+  github_stars: number;
+  github_forks: number;
   profiles: { username: string; display_name: string | null; avatar_url: string | null } | null;
 };
 
