@@ -203,74 +203,74 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 -- ============================================================
 -- SEED: DEFAULT ACHIEVEMENTS
 -- ============================================================
-INSERT INTO achievements (code, name, description, icon, xp_reward, rarity) VALUES
-  ('first_login',        'Welcome!',            'Signed in for the first time',              '👋', 10,  'common'),
-  ('profile_complete',   'Identity Established','Completed your developer profile',           '✅', 50,  'common'),
-  ('first_repo',         'Open Sourcer',        'Submitted your first repository',            '🚀', 100, 'common'),
-  ('first_review',       'Code Reviewer',       'Wrote your first review',                   '⭐', 25,  'common'),
-  ('five_reviews',       'Critic',              'Wrote 5 reviews',                           '📝', 75,  'uncommon'),
-  ('ten_reviews',        'Senior Reviewer',     'Wrote 10 reviews',                          '🔍', 150, 'uncommon'),
-  ('helpful_reviewer',   'Community Helper',    'Received 10 helpful votes on your reviews', '💡', 100, 'uncommon'),
-  ('five_repos',         'Prolific Builder',    'Submitted 5 repositories',                  '🏗️', 200, 'rare'),
-  ('level_10',           'Rising Star',         'Reached Level 10',                          '⭐', 200, 'uncommon'),
-  ('level_25',           'Contributor',         'Reached Level 25',                          '🌟', 500, 'rare'),
-  ('level_50',           'Architect',           'Reached Level 50',                          '💫', 1000,'epic'),
-  ('level_100',          'Legend',              'Reached the maximum level',                 '👑', 5000,'legendary'),
-  ('week_streak_7',      'Consistent',          'Active for 7 days in a row',                '🔥', 150, 'uncommon'),
-  ('week_streak_30',     'Dedicated',           'Active for 30 days in a row',               '🔥', 500, 'rare'),
-  ('first_comment',      'Conversationalist',   'Left your first comment',                   '💬', 10,  'common'),
-  ('featured_repo',      'Spotlight',           'Had a repository featured',                 '🌟', 300, 'rare')
+INSERT INTO achievements (id, code, name, description, icon, xp_reward, rarity) VALUES
+  ('11111111-1111-1111-1111-111111111111', 'first_login',        'Welcome!',            'Signed in for the first time',              '👋', 10,  'common'),
+  ('22222222-2222-2222-2222-222222222222', 'profile_complete',   'Identity Established','Completed your developer profile',           '✅', 50,  'common'),
+  ('33333333-3333-3333-3333-333333333333', 'first_repo',         'Open Sourcer',        'Submitted your first repository',            '🚀', 100, 'common'),
+  ('44444444-4444-4444-4444-444444444444', 'first_review',       'Code Reviewer',       'Wrote your first review',                   '⭐', 25,  'common'),
+  ('55555555-5555-5555-5555-555555555555', 'five_reviews',       'Critic',              'Wrote 5 reviews',                           '📝', 75,  'uncommon'),
+  ('66666666-6666-6666-6666-666666666666', 'ten_reviews',        'Senior Reviewer',     'Wrote 10 reviews',                          '🔍', 150, 'uncommon'),
+  ('77777777-7777-7777-7777-777777777777', 'helpful_reviewer',   'Community Helper',    'Received 10 helpful votes on your reviews', '💡', 100, 'uncommon'),
+  ('88888888-8888-8888-8888-888888888888', 'five_repos',         'Prolific Builder',    'Submitted 5 repositories',                  '🏗️', 200, 'rare'),
+  ('99999999-9999-9999-9999-999999999999', 'level_10',           'Rising Star',         'Reached Level 10',                          '⭐', 200, 'uncommon'),
+  ('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'level_25',           'Contributor',         'Reached Level 25',                          '🌟', 500, 'rare'),
+  ('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'level_50',           'Architect',           'Reached Level 50',                          '💫', 1000,'epic'),
+  ('cccccccc-cccc-cccc-cccc-cccccccccccc', 'level_100',          'Legend',              'Reached the maximum level',                 '👑', 5000,'legendary'),
+  ('dddddddd-dddd-dddd-dddd-dddddddddddd', 'week_streak_7',      'Consistent',          'Active for 7 days in a row',                '🔥', 150, 'uncommon'),
+  ('eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee', 'week_streak_30',     'Dedicated',           'Active for 30 days in a row',               '🔥', 500, 'rare'),
+  ('ffffffff-ffff-ffff-ffff-ffffffffffff', 'first_comment',      'Conversationalist',   'Left your first comment',                   '💬', 10,  'common'),
+  ('00000000-0000-0000-0000-000000000000', 'featured_repo',      'Spotlight',           'Had a repository featured',                 '🌟', 300, 'rare')
 ON CONFLICT (code) DO NOTHING;
 
 -- ============================================================
 -- SEED: DEFAULT CATEGORIES
 -- ============================================================
-INSERT INTO categories (name, slug, icon, color, sort_order) VALUES
-  ('Web Development',     'web-development',     '🌐', '#6366f1', 1),
-  ('Mobile',              'mobile',              '📱', '#8b5cf6', 2),
-  ('DevTools',            'devtools',            '🔧', '#ec4899', 3),
-  ('AI & ML',             'ai-ml',               '🤖', '#f59e0b', 4),
-  ('Databases',           'databases',           '🗄️', '#10b981', 5),
-  ('Security',            'security',            '🔒', '#ef4444', 6),
-  ('CLI Tools',           'cli-tools',           '⌨️', '#6b7280', 7),
-  ('Libraries',           'libraries',           '📦', '#3b82f6', 8),
-  ('Frameworks',          'frameworks',          '🏗️', '#f97316', 9),
-  ('APIs & SDKs',         'apis-sdks',           '🔌', '#84cc16', 10),
-  ('Documentation',       'documentation',       '📚', '#06b6d4', 11),
-  ('Open Source Tools',   'open-source-tools',   '🛠️', '#a855f7', 12)
+INSERT INTO categories (id, name, slug, icon, color, sort_order) VALUES
+  ('10000000-0000-0000-0000-000000000001', 'Web Development',     'web-development',     '🌐', '#6366f1', 1),
+  ('10000000-0000-0000-0000-000000000002', 'Mobile',              'mobile',              '📱', '#8b5cf6', 2),
+  ('10000000-0000-0000-0000-000000000003', 'DevTools',            'devtools',            '🔧', '#ec4899', 3),
+  ('10000000-0000-0000-0000-000000000004', 'AI & ML',             'ai-ml',               '🤖', '#f59e0b', 4),
+  ('10000000-0000-0000-0000-000000000005', 'Databases',           'databases',           '🗄️', '#10b981', 5),
+  ('10000000-0000-0000-0000-000000000006', 'Security',            'security',            '🔒', '#ef4444', 6),
+  ('10000000-0000-0000-0000-000000000007', 'CLI Tools',           'cli-tools',           '⌨️', '#6b7280', 7),
+  ('10000000-0000-0000-0000-000000000008', 'Libraries',           'libraries',           '📦', '#3b82f6', 8),
+  ('10000000-0000-0000-0000-000000000009', 'Frameworks',          'frameworks',          '🏗️', '#f97316', 9),
+  ('10000000-0000-0000-0000-000000000010', 'APIs & SDKs',         'apis-sdks',           '🔌', '#84cc16', 10),
+  ('10000000-0000-0000-0000-000000000011', 'Documentation',       'documentation',       '📚', '#06b6d4', 11),
+  ('10000000-0000-0000-0000-000000000012', 'Open Source Tools',   'open-source-tools',   '🛠️', '#a855f7', 12)
 ON CONFLICT (slug) DO NOTHING;
 
 -- ============================================================
 -- SEED: DEFAULT LANGUAGES
 -- ============================================================
-INSERT INTO languages (name, slug, color) VALUES
-  ('TypeScript', 'typescript', '#3178c6'),
-  ('JavaScript', 'javascript', '#f7df1e'),
-  ('Python',     'python',     '#3572A5'),
-  ('Rust',       'rust',       '#dea584'),
-  ('Go',         'go',         '#00ADD8'),
-  ('Java',       'java',       '#b07219'),
-  ('C++',        'cpp',        '#f34b7d'),
-  ('C',          'c',          '#555555'),
-  ('Ruby',       'ruby',       '#701516'),
-  ('PHP',        'php',        '#4F5D95'),
-  ('Swift',      'swift',      '#F05138'),
-  ('Kotlin',     'kotlin',     '#A97BFF'),
-  ('Dart',       'dart',       '#00B4AB'),
-  ('C#',         'csharp',     '#178600'),
-  ('Zig',        'zig',        '#ec915c'),
-  ('Elixir',     'elixir',     '#6e4a7e'),
-  ('Haskell',    'haskell',    '#5e5086'),
-  ('Scala',      'scala',      '#c22d40')
+INSERT INTO languages (id, name, slug, color) VALUES
+  ('20000000-0000-0000-0000-000000000001', 'TypeScript', 'typescript', '#3178c6'),
+  ('20000000-0000-0000-0000-000000000002', 'JavaScript', 'javascript', '#f7df1e'),
+  ('20000000-0000-0000-0000-000000000003', 'Python',     'python',     '#3572A5'),
+  ('20000000-0000-0000-0000-000000000004', 'Rust',       'rust',       '#dea584'),
+  ('20000000-0000-0000-0000-000000000005', 'Go',         'go',         '#00ADD8'),
+  ('20000000-0000-0000-0000-000000000006', 'Java',       'java',       '#b07219'),
+  ('20000000-0000-0000-0000-000000000007', 'C++',        'cpp',        '#f34b7d'),
+  ('20000000-0000-0000-0000-000000000008', 'C',          'c',          '#555555'),
+  ('20000000-0000-0000-0000-000000000009', 'Ruby',       'ruby',       '#701516'),
+  ('20000000-0000-0000-0000-000000000010', 'PHP',        'php',        '#4F5D95'),
+  ('20000000-0000-0000-0000-000000000011', 'Swift',      'swift',      '#F05138'),
+  ('20000000-0000-0000-0000-000000000012', 'Kotlin',     'kotlin',     '#A97BFF'),
+  ('20000000-0000-0000-0000-000000000013', 'Dart',       'dart',       '#00B4AB'),
+  ('20000000-0000-0000-0000-000000000014', 'C#',         'csharp',     '#178600'),
+  ('20000000-0000-0000-0000-000000000015', 'Zig',        'zig',        '#ec915c'),
+  ('20000000-0000-0000-0000-000000000016', 'Elixir',     'elixir',     '#6e4a7e'),
+  ('20000000-0000-0000-0000-000000000017', 'Haskell',    'haskell',    '#5e5086'),
+  ('20000000-0000-0000-0000-000000000018', 'Scala',      'scala',      '#c22d40')
 ON CONFLICT (slug) DO NOTHING;
 
 -- ============================================================
 -- SEED: DEFAULT DAILY MISSIONS
 -- ============================================================
-INSERT INTO daily_missions (code, name, description, xp_reward, action_type, action_count) VALUES
-  ('daily_login',       'Daily Check-in',      'Log in to GitBoost today',               10,  'login',       1),
-  ('write_review',      'Code Reviewer',       'Write a review for any repository',       25,  'review',      1),
-  ('leave_comment',     'Start a Conversation','Leave a comment on a repository',         10,  'comment',     1),
-  ('explore_repos',     'Explorer',            'View 5 different repositories today',     15,  'view_repo',   5),
-  ('vote_helpful',      'Be Helpful',          'Mark 3 reviews as helpful',               10,  'vote',        3)
+INSERT INTO daily_missions (id, code, name, description, xp_reward, action_type, action_count) VALUES
+  ('30000000-0000-0000-0000-000000000001', 'daily_login',       'Daily Check-in',      'Log in to GitBoost today',               10,  'login',       1),
+  ('30000000-0000-0000-0000-000000000002', 'write_review',      'Code Reviewer',       'Write a review for any repository',       25,  'review',      1),
+  ('30000000-0000-0000-0000-000000000003', 'leave_comment',     'Start a Conversation','Leave a comment on a repository',         10,  'comment',     1),
+  ('30000000-0000-0000-0000-000000000004', 'explore_repos',     'Explorer',            'View 5 different repositories today',     15,  'view_repo',   5),
+  ('30000000-0000-0000-0000-000000000005', 'vote_helpful',      'Be Helpful',          'Mark 3 reviews as helpful',               10,  'vote',        3)
 ON CONFLICT (code) DO NOTHING;

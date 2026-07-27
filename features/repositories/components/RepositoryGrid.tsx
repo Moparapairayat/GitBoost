@@ -4,7 +4,13 @@ import { motion } from "framer-motion";
 import RepositoryCard from "./RepositoryCard";
 import type { Tables } from "@/types/database.types";
 
-type Repository = Tables<"repositories"> & {
+type Repository = {
+  id: string;
+  title: string;
+  description: string | null;
+  language: string | null;
+  github_stars: number;
+  github_forks: number;
   profiles: { username: string; display_name: string | null; avatar_url: string | null } | null;
 };
 

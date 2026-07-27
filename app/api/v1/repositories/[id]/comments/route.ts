@@ -9,7 +9,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
     const supabase = await createClient();
     const { data, error } = await supabase
       .from("comments")
-      .select("id, body, is_edited, created_at, updated_at, profile_id, parent_id, profiles(username, display_name, avatar_url)", { count: "exact" })
+      .select("id, body, is_edited, created_at, updated_at, profile_id, parent_id, profiles!repositories_profile_id_fkey(username, display_name, avatar_url)", { count: "exact" })
       .eq("repository_id", id)
       .is("deleted_at", null)
       .order("created_at", { ascending: true });

@@ -17,7 +17,7 @@ export async function GET(request: Request) {
     const supabase = await createClient();
     let query = supabase
       .from("repositories")
-      .select("id, title, description, language, github_stars, github_forks, view_count, trending_score, created_at, profile_id, profiles(username, display_name, avatar_url)", { count: "exact" })
+      .select("id, title, description, language, github_stars, github_forks, view_count, trending_score, created_at, profile_id, profiles!repositories_profile_id_fkey(username, display_name, avatar_url)", { count: "exact" })
       .eq("status", "active")
       .is("deleted_at", null)
       .order("created_at", { ascending: false });
@@ -93,3 +93,4 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: false, data: null, error: "Failed to create repository" }, { status: 500 });
   }
 }
+
