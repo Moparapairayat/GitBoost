@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Zap, Search, Bell, Menu, X, ChevronDown,
+  Zap, Search, Menu, X, ChevronDown,
   LayoutDashboard, Code2, TrendingUp,
   Settings, LogOut, User, Shield
 } from "lucide-react";
@@ -14,6 +14,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { cn } from "@/utils/cn";
+import { NotificationBell } from "@/features/notifications/components/NotificationBell";
 import type { Tables } from "@/types/database.types";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
@@ -100,10 +101,7 @@ export function Navbar({ profile }: NavbarProps) {
             {profile ? (
               <>
                 {/* Notifications */}
-                <Link href="/dashboard/notifications" id="nav-notifications"
-                  className="w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-all relative">
-                  <Bell className="w-4 h-4" />
-                </Link>
+                <NotificationBell />
 
                 {/* Profile dropdown */}
                 <div className="relative">
