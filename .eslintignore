@@ -1,0 +1,16 @@
+# Generated files
+types/database.types.ts
+
+# Dependencies
+node_modules/
+
+# Build outputs
+.next/
+out/
+build/
+
+# Environment files
+.env*.local
+
+# Supabase
+supabase/.temp/
