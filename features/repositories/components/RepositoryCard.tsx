@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { Star, GitBranch, ExternalLink } from "lucide-react";
-import type { Tables } from "@/types/database.types";
 import { formatNumber } from "@/utils/format";
 
 type Repository = {

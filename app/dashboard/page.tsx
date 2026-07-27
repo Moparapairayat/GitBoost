@@ -139,7 +139,7 @@ export default async function DashboardPage() {
       )}
 
       {/* Quick actions */}
-      <div className="grid sm:grid-cols-2 gap-4 mt-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
         <Link href="/repositories/submit"
           className="flex items-center gap-4 p-5 rounded-xl transition-all hover:scale-[1.02] group"
           style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))" }}
@@ -154,7 +154,7 @@ export default async function DashboardPage() {
           </div>
         </Link>
 
-        <a href="/explore/trending"
+        <Link href="/explore/trending"
           className="flex items-center gap-4 p-5 rounded-xl transition-all hover:scale-[1.02] group"
           style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))" }}
           id="explore-cta">
@@ -166,7 +166,35 @@ export default async function DashboardPage() {
             <p className="font-semibold text-sm">Explore Trending</p>
             <p className="text-xs text-muted-foreground">Discover what the community loves</p>
           </div>
-        </a>
+        </Link>
+
+        <Link href="/dashboard/achievements"
+          className="flex items-center gap-4 p-5 rounded-xl transition-all hover:scale-[1.02] group"
+          style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))" }}
+          id="achievements-cta">
+          <div className="w-10 h-10 rounded-lg flex items-center justify-center"
+            style={{ background: "hsl(263 70% 65% / 0.15)" }}>
+            <Award className="w-5 h-5" style={{ color: "hsl(263 70% 65%)" }} />
+          </div>
+          <div>
+            <p className="font-semibold text-sm">Achievements</p>
+            <p className="text-xs text-muted-foreground">View your badges and milestones</p>
+          </div>
+        </Link>
+
+        <Link href="/dashboard/notifications"
+          className="flex items-center gap-4 p-5 rounded-xl transition-all hover:scale-[1.02] group"
+          style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))" }}
+          id="notifications-cta">
+          <div className="w-10 h-10 rounded-lg flex items-center justify-center"
+            style={{ background: "hsl(217 91% 60% / 0.15)" }}>
+            <Bell className="w-5 h-5" style={{ color: "hsl(217 91% 60%)" }} />
+          </div>
+          <div>
+            <p className="font-semibold text-sm">Notifications</p>
+            <p className="text-xs text-muted-foreground">Check your latest updates</p>
+          </div>
+        </Link>
       </div>
     </div>
   );

@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import RepositoryCard from "./RepositoryCard";
-import type { Tables } from "@/types/database.types";
 
 type Repository = {
   id: string;
